@@ -1,6 +1,7 @@
 {
   "name": "dev-toolkits",
-  "version": "0.1.0",
+  "productName": "Dev Toolkits",
+  "version": "0.1.1",
   "description": "Open-source desktop toolkit of commonly used developer utilities (Mermaid renderer, JSON formatter, and more).",
   "main": "dist-electron/main.js",
   "type": "module",
@@ -23,7 +24,8 @@
     "package:mac": "npm run build && electron-builder --mac",
     "package:win": "npm run build && electron-builder --win",
     "package:linux": "npm run build && electron-builder --linux",
-    "typecheck": "tsc -b --noEmit"
+    "typecheck": "tsc -b --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "developer-tools",
@@ -35,6 +37,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "electron": "^33.2.1",
     "mermaid": "^11.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -46,7 +49,6 @@
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
-    "electron": "^33.2.1",
     "electron-builder": "^25.1.8",
     "typescript": "^5.7.2",
     "vite": "^6.0.5",
@@ -75,16 +77,24 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["arm64", "x64"]
+          "arch": [
+            "arm64",
+            "x64"
+          ]
         }
       ],
       "category": "public.app-category.developer-tools"
     },
     "win": {
-      "target": ["nsis"]
+      "target": [
+        "nsis"
+      ]
     },
     "linux": {
-      "target": ["AppImage", "deb"],
+      "target": [
+        "AppImage",
+        "deb"
+      ],
       "category": "Development"
     }
   }

@@ -12,7 +12,7 @@ export default function Sidebar({ tools, activeToolId, onSelect, onOpenHelp }: P
     <aside className="sidebar">
       <div className="brand">
         <div className="brand-mark">DT</div>
-        <div className="brand-name">DevTools Kit</div>
+        <div className="brand-name">Dev Toolkits</div>
       </div>
       <nav className="tool-list">
         {tools.map((tool) => (

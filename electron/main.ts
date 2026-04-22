@@ -117,10 +117,10 @@ function buildMenu() {
         {
           label: 'Report an Issue',
           click: () =>
-            shell.openExternal('https://github.com/anirbanbhjobs/devtools-kit/issues'),
+            shell.openExternal('https://github.com/anirbanbhat/dev-toolkits/issues'),
         },
         {
-          label: 'About DevTools Kit',
+          label: 'About Dev Toolkits',
           click: () => openHelpDoc('about'),
         },
       ],

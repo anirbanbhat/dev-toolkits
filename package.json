@@ -1,11 +1,11 @@
 {
-  "name": "devtools-kit",
+  "name": "dev-toolkits",
   "version": "0.1.0",
   "description": "Open-source desktop toolkit of commonly used developer utilities (Mermaid renderer, JSON formatter, and more).",
   "main": "dist-electron/main.js",
   "type": "module",
   "bin": {
-    "devtools-kit": "bin/devtools-kit.js"
+    "dev-toolkits": "bin/dev-toolkits.js"
   },
   "files": [
     "dist",
@@ -54,8 +54,8 @@
     "vite-plugin-electron-renderer": "^0.14.6"
   },
   "build": {
-    "appId": "com.devtoolskit.app",
-    "productName": "DevTools Kit",
+    "appId": "com.devtoolkits.app",
+    "productName": "Dev Toolkits",
     "directories": {
       "output": "release"
     },

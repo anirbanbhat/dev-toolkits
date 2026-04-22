@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-const SAMPLE = `{"name":"DevTools Kit","version":"0.1.0","tools":[{"id":"mermaid","enabled":true},{"id":"json","enabled":true}],"settings":{"theme":"dark","indent":2}}`;
+const SAMPLE = `{"name":"Dev Toolkits","version":"0.1.0","tools":[{"id":"mermaid","enabled":true},{"id":"json","enabled":true}],"settings":{"theme":"dark","indent":2}}`;
 
 type ParseResult =
   | { ok: true; value: unknown }

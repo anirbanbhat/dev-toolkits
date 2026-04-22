@@ -1,4 +1,4 @@
-# Extending DevTools Kit
+# Extending Dev Toolkits
 
 Adding a new tool is a three-step process. The architecture is intentionally flat — there's no plugin manifest or lifecycle to learn.
 

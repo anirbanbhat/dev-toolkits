@@ -1,10 +1,10 @@
-# About DevTools Kit
+# About Dev Toolkits
 
-DevTools Kit is an open-source desktop toolkit of common developer utilities, packaged as both a native app (`.dmg` / `.exe` / AppImage) and an npm-installable CLI.
+Dev Toolkits is an open-source desktop toolkit of common developer utilities, packaged as both a native app (`.dmg` / `.exe` / AppImage) and an npm-installable CLI.
 
 ## Why
 
-Developers reach for the same handful of small tools over and over — diagram renderers, formatters, encoders. Most live as standalone websites that send your data to a third party. DevTools Kit collects them in one offline-first desktop app.
+Developers reach for the same handful of small tools over and over — diagram renderers, formatters, encoders. Most live as standalone websites that send your data to a third party. Dev Toolkits collects them in one offline-first desktop app.
 
 ## Principles
 

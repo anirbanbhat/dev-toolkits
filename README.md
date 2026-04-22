@@ -1,4 +1,4 @@
-# DevTools Kit
+# Dev Toolkits
 
 An open-source desktop toolkit of common developer utilities. One window, one sidebar, many tools — all running locally.
 
@@ -13,16 +13,16 @@ More tools coming. The architecture is plugin-style — see [docs/extending.md](
 
 ### macOS (`.dmg`)
 
-Download the latest `.dmg` from the [Releases](https://github.com/anirbanbhjobs/devtools-kit/releases) page and drag the app to `/Applications`.
+Download the latest `.dmg` from the [Releases](https://github.com/anirbanbhat/dev-toolkits/releases) page and drag the app to `/Applications`.
 
 ### npm (cross-platform)
 
 ```bash
-npm install -g devtools-kit
-devtools-kit
+npm install -g dev-toolkits
+dev-toolkits
 ```
 
-This works on macOS, Windows, and Linux. The `devtools-kit` command launches the app.
+This works on macOS, Windows, and Linux. The `dev-toolkits` command launches the app.
 
 ## Usage
 
@@ -34,8 +34,8 @@ This works on macOS, Windows, and Linux. The `devtools-kit` command launches the
 ## Develop
 
 ```bash
-git clone https://github.com/anirbanbhjobs/devtools-kit.git
-cd devtools-kit
+git clone https://github.com/anirbanbhat/dev-toolkits.git
+cd dev-toolkits
 npm install
 npm run dev      # start in development mode
 npm run build    # build production bundle
@@ -53,23 +53,6 @@ Full guide: [docs/extending.md](docs/extending.md).
 ## Tech stack
 
 Electron · React 18 · TypeScript · Vite · electron-builder
-
-## Publishing to npm
-
-The name `devtools-kit` is **already taken** on npm. Before publishing, change the `name` field in `package.json` to one of these (verified available as of 2026-04-22):
-
-- `dev-toolkits`
-- `devpalette`
-- `devkit-studio`
-- `utilitybelt`
-- `tinkerkit`
-- `devbench`
-- `craftkit`
-- `devtools-studio`
-- `forge-dev` / `dev-forge`
-- `devkit-desktop`
-
-Re-check with `npm view <name>` before publishing — availability drifts.
 
 ## License
 

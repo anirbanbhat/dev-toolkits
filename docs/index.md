@@ -1,6 +1,6 @@
-# DevTools Kit — User Manual
+# Dev Toolkits — User Manual
 
-DevTools Kit is an open-source desktop toolkit for common developer utilities. Each tool lives in its own tab in the sidebar; you can switch between them at any time without losing your input.
+Dev Toolkits is an open-source desktop toolkit for common developer utilities. Each tool lives in its own tab in the sidebar; you can switch between them at any time without losing your input.
 
 ## Getting started
 

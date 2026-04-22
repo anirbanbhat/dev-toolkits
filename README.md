@@ -54,6 +54,33 @@ Full guide: [docs/extending.md](docs/extending.md).
 
 Electron · React 18 · TypeScript · Vite · electron-builder
 
+## Release automation
+
+Every push to `main` triggers `.github/workflows/release.yml`, which:
+
+1. Bumps the patch version (`x.y.z` → `x.y.(z+1)`) and pushes a commit + tag.
+2. Builds `.dmg` (macOS), `.exe` (Windows), and `.AppImage`/`.deb` (Linux) in parallel.
+3. Publishes the same version to npm.
+4. Creates a GitHub Release for the tag with all binaries attached.
+
+The npm package version and the GitHub release tag are always identical — they both come from the same version-bump commit.
+
+### One-time setup
+
+**Required secret:** `NPM_TOKEN`
+
+1. Generate a granular access token at https://www.npmjs.com/settings/~/tokens with:
+   - **Packages and scopes:** read/write, scoped to `dev-toolkits`
+   - **Bypass 2FA for publishing:** enabled
+2. In the GitHub repo, go to **Settings → Secrets and variables → Actions → New repository secret**.
+3. Name: `NPM_TOKEN`, Value: the token from step 1.
+
+`GITHUB_TOKEN` is provided automatically — no setup needed.
+
+### Skipping a release
+
+If you push a commit to `main` that shouldn't trigger a release (docs tweak, CI fix, etc.), include `[skip release]` anywhere in the commit message.
+
 ## License
 
 [MIT](LICENSE)

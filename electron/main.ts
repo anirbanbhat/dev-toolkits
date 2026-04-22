@@ -3,6 +3,11 @@ import path from 'node:path';
 import { readFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
+// Must be set before `app` emits 'ready'. Without this, raw-binary launches
+// (e.g. via the npm bin) show "Electron" in the macOS menu bar, because the
+// default comes from Electron's own .app bundle CFBundleName.
+app.setName('Dev Toolkits');
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // In dev, Vite serves the renderer; in prod we load from the built dist.

@@ -54,6 +54,23 @@ Full guide: [docs/extending.md](docs/extending.md).
 
 Electron · React 18 · TypeScript · Vite · electron-builder
 
+## Publishing to npm
+
+The name `devtools-kit` is **already taken** on npm. Before publishing, change the `name` field in `package.json` to one of these (verified available as of 2026-04-22):
+
+- `dev-toolkits`
+- `devpalette`
+- `devkit-studio`
+- `utilitybelt`
+- `tinkerkit`
+- `devbench`
+- `craftkit`
+- `devtools-studio`
+- `forge-dev` / `dev-forge`
+- `devkit-desktop`
+
+Re-check with `npm view <name>` before publishing — availability drifts.
+
 ## License
 
 [MIT](LICENSE)

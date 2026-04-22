@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c2747"/>
+      <stop offset="55%" stop-color="#0f1424"/>
+      <stop offset="100%" stop-color="#05070e"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.25" r="0.6">
+      <stop offset="0%" stop-color="rgba(79,140,255,0.28)"/>
+      <stop offset="70%" stop-color="rgba(79,140,255,0)"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a6d0ff"/>
+      <stop offset="50%" stop-color="#6aa7ff"/>
+      <stop offset="100%" stop-color="#3f7bff"/>
+    </linearGradient>
+    <linearGradient id="hexStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="rgba(122,182,255,0.55)"/>
+      <stop offset="100%" stop-color="rgba(79,140,255,0.2)"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <!-- App badge background -->
+  <rect width="1024" height="1024" rx="224" ry="224" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="224" ry="224" fill="url(#glow)"/>
+
+  <!-- Outer hexagon (developer "nut/bolt" motif) -->
+  <polygon
+    points="512,108 880,320 880,704 512,916 144,704 144,320"
+    fill="none"
+    stroke="url(#hexStroke)"
+    stroke-width="14"
+    stroke-linejoin="round"
+    opacity="0.9"/>
+
+  <!-- Inner faint hexagon for depth -->
+  <polygon
+    points="512,214 788,374 788,650 512,810 236,650 236,374"
+    fill="rgba(79,140,255,0.05)"
+    stroke="rgba(79,140,255,0.18)"
+    stroke-width="4"
+    stroke-linejoin="round"/>
+
+  <!-- Soft glow behind glyph -->
+  <ellipse cx="512" cy="520" rx="260" ry="200" fill="rgba(79,140,255,0.18)" filter="url(#softShadow)"/>
+
+  <!-- Code braces + slash — the wordless signature of a developer tool -->
+  <g fill="none" stroke="url(#accent)" stroke-width="56" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Left brace { -->
+    <path d="M 372 304
+             C 302 304, 292 304, 292 374
+             L 292 470
+             C 292 502, 276 512, 228 512
+             C 276 512, 292 522, 292 554
+             L 292 650
+             C 292 720, 302 720, 372 720"/>
+
+    <!-- Slash / (bottom-left to top-right) -->
+    <line x1="608" y1="300" x2="416" y2="724"/>
+
+    <!-- Right brace } -->
+    <path d="M 652 304
+             C 722 304, 732 304, 732 374
+             L 732 470
+             C 732 502, 748 512, 796 512
+             C 748 512, 732 522, 732 554
+             L 732 650
+             C 732 720, 722 720, 652 720"/>
+  </g>
+
+  <!-- Subtle corner dot to hint at "multiple tools" / activity indicator -->
+  <circle cx="820" cy="204" r="28" fill="url(#accent)"/>
+  <circle cx="820" cy="204" r="12" fill="rgba(255,255,255,0.9)"/>
+</svg>

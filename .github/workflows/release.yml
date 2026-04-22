@@ -25,6 +25,7 @@ jobs:
     outputs:
       version: ${{ steps.bump.outputs.version }}
       tag: ${{ steps.bump.outputs.tag }}
+      sha: ${{ steps.bump.outputs.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,11 +44,14 @@ jobs:
           NEW=$(npm version patch --no-git-tag-version)
           git add package.json package-lock.json
           git commit -m "chore(release): $NEW [skip release]"
-          git tag "$NEW"
+          git tag -a "$NEW" -m "Release $NEW"
           echo "version=${NEW#v}" >> "$GITHUB_OUTPUT"
           echo "tag=$NEW" >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Push commit and tag
-        run: git push origin HEAD:main --follow-tags
+        run: |
+          git push origin HEAD:main
+          git push origin ${{ steps.bump.outputs.tag }}
 
   # 2. Build platform binaries in parallel. Each runner checks out the new tag
   #    so all artifacts carry the same version.
@@ -70,7 +74,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ needs.prepare.outputs.tag }}
+          ref: ${{ needs.prepare.outputs.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -89,26 +93,7 @@ jobs:
             release/*.zip
           if-no-files-found: ignore
 
-  # 3. Publish the same version to npm.
-  publish-npm:
-    needs: [prepare, build]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ needs.prepare.outputs.tag }}
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: "https://registry.npmjs.org"
-      - run: npm ci
-      - name: Publish to npm
-        # prepublishOnly runs `npm run build` automatically.
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-  # 4. Attach all built binaries to a GitHub Release for the same tag.
+  # 3. Attach all built binaries to a GitHub Release for the same tag.
   release:
     needs: [prepare, build]
     runs-on: ubuntu-latest

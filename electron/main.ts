@@ -35,6 +35,11 @@ function createWindow() {
     mainWindow.loadFile(path.join(__dirname, '..', 'dist', 'index.html'));
   }
 
+  mainWindow.once('ready-to-show', () => {
+    mainWindow?.show();
+    mainWindow?.focus();
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
@@ -147,9 +152,18 @@ ipcMain.handle('docs:list', async () => {
     .map((name) => name.replace(/\.md$/, ''));
 });
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+  // When launched as a raw binary from a terminal (e.g. via the npm bin
+  // launcher), macOS defaults the process to agent-mode: no dock icon and no
+  // focus stealing, so the window opens invisibly. Force regular-app mode.
+  if (process.platform === 'darwin') {
+    app.setActivationPolicy?.('regular');
+    await app.dock?.show();
+  }
+
   buildMenu();
   createWindow();
+  app.focus({ steal: true });
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

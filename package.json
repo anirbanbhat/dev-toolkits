@@ -34,7 +34,7 @@
     "json-formatter",
     "devtools"
   ],
-  "author": "",
+  "author": "Anirban Bhattacherji <anirbanbhattacherji@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "mermaid": "^11.4.1",

@@ -1,9 +1,10 @@
 name: Release
 
 # Runs on every push to main (including merged PRs). Bumps the patch version,
-# builds .dmg/.exe/.AppImage, publishes to npm, and creates a GitHub release.
-# The npm package version and the GitHub release tag are always in sync —
-# they're produced from the same version bump commit in the `prepare` job.
+# builds .dmg (mac) and .exe (windows), publishes to npm, and creates a GitHub
+# release. The npm package version and the GitHub release tag are always in
+# sync — they're produced from the same version bump commit in the `prepare`
+# job. Linux is intentionally not built; users can run via `npm install -g`.
 
 on:
   push:
@@ -33,7 +34,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
       - name: Configure git identity
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -67,9 +68,6 @@ jobs:
           - os: windows-latest
             build_flag: "--win"
             artifact_name: windows
-          - os: ubuntu-latest
-            build_flag: "--linux"
-            artifact_name: linux
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -77,15 +75,7 @@ jobs:
           ref: ${{ needs.prepare.outputs.sha }}
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - name: Install Linux build dependencies
-        # ubuntu-latest is Ubuntu 24.04, which no longer ships libfuse2 by default.
-        # AppImage's runtime needs libfuse2; without it electron-builder's --linux
-        # target fails when packaging the AppImage. fakeroot/dpkg are needed for .deb.
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libfuse2 fakeroot dpkg
+          node-version: 22
       - run: npm ci
       - run: npm run build
       - name: Package
@@ -96,8 +86,6 @@ jobs:
           path: |
             release/*.dmg
             release/*.exe
-            release/*.AppImage
-            release/*.deb
             release/*.zip
           if-no-files-found: ignore
 
@@ -111,7 +99,7 @@ jobs:
           ref: ${{ needs.prepare.outputs.sha }}
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           registry-url: "https://registry.npmjs.org"
       - run: npm ci
       - name: Publish to npm
@@ -136,8 +124,6 @@ jobs:
           files: |
             artifacts/*.dmg
             artifacts/*.exe
-            artifacts/*.AppImage
-            artifacts/*.deb
             artifacts/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

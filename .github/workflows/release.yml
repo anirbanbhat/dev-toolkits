@@ -78,6 +78,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Install Linux build dependencies
+        # ubuntu-latest is Ubuntu 24.04, which no longer ships libfuse2 by default.
+        # AppImage's runtime needs libfuse2; without it electron-builder's --linux
+        # target fails when packaging the AppImage. fakeroot/dpkg are needed for .deb.
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libfuse2 fakeroot dpkg
       - run: npm ci
       - run: npm run build
       - name: Package

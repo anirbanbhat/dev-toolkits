@@ -45,21 +45,28 @@
     "url": "https://github.com/anirbanbhat/dev-toolkits/issues"
   },
   "dependencies": {
+    "cron-parser": "^5.5.0",
+    "cronstrue": "^3.14.0",
+    "diff": "^9.0.0",
     "js-md5": "^0.8.3",
     "mermaid": "^11.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
-    "remark-gfm": "^4.0.0"
+    "remark-gfm": "^4.0.0",
+    "ulid": "^3.0.2",
+    "uuid": "^14.0.0"
   },
   "optionalDependencies": {
     "electron": "^33.2.1"
   },
   "devDependencies": {
+    "@types/diff": "^7.0.2",
     "@types/js-md5": "^0.8.0",
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
+    "@types/uuid": "^10.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "electron-builder": "^25.1.8",
     "typescript": "^5.7.2",

@@ -107,7 +107,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - run: npm ci
       - name: Publish to npm
-        run: npm publish --access public --provenance
+        run: npm publish --access public --provenance --registry https://registry.npmjs.org
 
 
   # 4. Attach all built binaries to a GitHub Release for the same tag.

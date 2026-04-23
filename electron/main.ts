@@ -123,6 +123,18 @@ function buildMenu() {
           label: 'JSON Formatter — Docs',
           click: () => openHelpDoc('json-formatter'),
         },
+        {
+          label: 'JWT Decoder — Docs',
+          click: () => openHelpDoc('jwt'),
+        },
+        {
+          label: 'Hash Generator — Docs',
+          click: () => openHelpDoc('hash'),
+        },
+        {
+          label: 'Regex Tester — Docs',
+          click: () => openHelpDoc('regex'),
+        },
         { type: 'separator' },
         {
           label: 'Report an Issue',

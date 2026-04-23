@@ -11,6 +11,9 @@ const NAV: Array<{ id: string; label: string }> = [
   { id: 'index', label: 'Overview' },
   { id: 'mermaid', label: 'Mermaid' },
   { id: 'json-formatter', label: 'JSON Formatter' },
+  { id: 'jwt', label: 'JWT' },
+  { id: 'hash', label: 'Hash' },
+  { id: 'regex', label: 'Regex' },
   { id: 'extending', label: 'Extending' },
   { id: 'about', label: 'About' },
 ];

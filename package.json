@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "electron": "^33.2.1",
+    "js-md5": "^0.8.3",
     "mermaid": "^11.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -53,6 +54,7 @@
     "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
+    "@types/js-md5": "^0.8.0",
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",

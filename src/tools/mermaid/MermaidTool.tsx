@@ -11,6 +11,10 @@ mermaid.initialize({
   startOnLoad: false,
   theme: 'default',
   securityLevel: 'strict',
+  // Render labels as native SVG <text>, not HTML inside <foreignObject>.
+  // foreignObject cannot be rasterized by canvas.drawImage, so without this
+  // the JPEG export renders the diagram shapes but drops all the text labels.
+  flowchart: { htmlLabels: false },
 });
 
 export default function MermaidTool() {
@@ -52,56 +56,75 @@ export default function MermaidTool() {
   const downloadJpeg = async () => {
     if (!svg) return;
 
-    // Pull dimensions from the SVG (width/height attrs, fall back to viewBox).
-    const doc = new DOMParser().parseFromString(svg, 'image/svg+xml');
-    const svgEl = doc.documentElement;
-    let width = parseFloat(svgEl.getAttribute('width') || '0');
-    let height = parseFloat(svgEl.getAttribute('height') || '0');
-    if (!width || !height) {
-      const viewBox = svgEl.getAttribute('viewBox');
-      const parts = viewBox ? viewBox.split(/\s+/).map(Number) : [];
-      width = parts[2] || 1200;
-      height = parts[3] || 800;
-    }
-
-    // Render at 2x so the raster output stays crisp when zoomed.
-    const scale = 2;
-    const canvas = document.createElement('canvas');
-    canvas.width = width * scale;
-    canvas.height = height * scale;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // JPEG has no alpha channel — fill white before the diagram is drawn.
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.scale(scale, scale);
-
-    const svgBlob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
-    const svgUrl = URL.createObjectURL(svgBlob);
     try {
+      // Parse so we can inspect/patch dimensions and namespace.
+      const doc = new DOMParser().parseFromString(svg, 'image/svg+xml');
+      const svgEl = doc.documentElement as unknown as SVGSVGElement;
+
+      // Some toolchains strip xmlns; Image element refuses to load SVG without it.
+      if (!svgEl.getAttribute('xmlns')) {
+        svgEl.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      }
+
+      // Work out width/height from attrs or viewBox.
+      let width = parseFloat(svgEl.getAttribute('width') || '0');
+      let height = parseFloat(svgEl.getAttribute('height') || '0');
+      if (!width || !height) {
+        const viewBox = svgEl.getAttribute('viewBox');
+        const parts = viewBox ? viewBox.trim().split(/[\s,]+/).map(Number) : [];
+        width = parts[2] || 1200;
+        height = parts[3] || 800;
+      }
+      // Force explicit width/height so the Image rasterizes at a known size.
+      svgEl.setAttribute('width', String(width));
+      svgEl.setAttribute('height', String(height));
+
+      const serialized = new XMLSerializer().serializeToString(svgEl);
+      // data: URLs work more reliably than blob: URLs for <Image> + SVG,
+      // especially in Electron's file:// context.
+      const dataUrl =
+        'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(serialized);
+
+      const scale = 2;
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(width * scale));
+      canvas.height = Math.max(1, Math.round(height * scale));
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('Could not acquire 2D context.');
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.scale(scale, scale);
+
       const img = new Image();
       await new Promise<void>((resolve, reject) => {
         img.onload = () => resolve();
-        img.onerror = () => reject(new Error('Could not load SVG for rasterization'));
-        img.src = svgUrl;
+        img.onerror = () =>
+          reject(new Error('Browser could not load the SVG for rasterization.'));
+        img.src = dataUrl;
       });
       ctx.drawImage(img, 0, 0, width, height);
-    } finally {
-      URL.revokeObjectURL(svgUrl);
+
+      const blob = await new Promise<Blob | null>((resolve) => {
+        canvas.toBlob(resolve, 'image/jpeg', 0.92);
+      });
+      if (!blob) {
+        throw new Error(
+          'Canvas refused to export (likely tainted by cross-origin content).',
+        );
+      }
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'diagram.jpg';
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      const message = e instanceof Error ? e.message : String(e);
+      console.error('JPEG export failed:', e);
+      setError(`JPEG export failed: ${message}`);
     }
-
-    const blob = await new Promise<Blob | null>((resolve) => {
-      canvas.toBlob(resolve, 'image/jpeg', 0.92);
-    });
-    if (!blob) return;
-
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'diagram.jpg';
-    a.click();
-    URL.revokeObjectURL(url);
   };
 
   const copySvg = async () => {

@@ -34,6 +34,15 @@ export default function App() {
             <p className="muted toolbar-desc">{activeTool.description}</p>
           </div>
           <div className="toolbar-right">
+            <a
+              className="sponsor-btn"
+              href="https://github.com/sponsors/anirbanbhat"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Sponsor on GitHub or Polar"
+            >
+              ♥ Sponsor
+            </a>
             <button
               className="help-btn"
               onClick={() => setHelpDocId('index')}

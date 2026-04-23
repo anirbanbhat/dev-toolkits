@@ -135,6 +135,18 @@ function buildMenu() {
           label: 'Regex Tester — Docs',
           click: () => openHelpDoc('regex'),
         },
+        {
+          label: 'UUID / ULID Generator — Docs',
+          click: () => openHelpDoc('uuid'),
+        },
+        {
+          label: 'Cron Explainer — Docs',
+          click: () => openHelpDoc('cron'),
+        },
+        {
+          label: 'Diff Viewer — Docs',
+          click: () => openHelpDoc('diff'),
+        },
         { type: 'separator' },
         {
           label: 'Report an Issue',

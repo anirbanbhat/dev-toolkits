@@ -14,6 +14,9 @@ const NAV: Array<{ id: string; label: string }> = [
   { id: 'jwt', label: 'JWT' },
   { id: 'hash', label: 'Hash' },
   { id: 'regex', label: 'Regex' },
+  { id: 'uuid', label: 'UUID / ULID' },
+  { id: 'cron', label: 'Cron' },
+  { id: 'diff', label: 'Diff' },
   { id: 'extending', label: 'Extending' },
   { id: 'about', label: 'About' },
 ];

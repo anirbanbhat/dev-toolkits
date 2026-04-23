@@ -4,6 +4,9 @@ import JsonTool from './json/JsonTool';
 import JwtTool from './jwt/JwtTool';
 import HashTool from './hash/HashTool';
 import RegexTool from './regex/RegexTool';
+import UuidTool from './uuid/UuidTool';
+import CronTool from './cron/CronTool';
+import DiffTool from './diff/DiffTool';
 
 /**
  * The single source of truth for which tools exist. Adding a new tool is a
@@ -49,6 +52,30 @@ export const tools: Tool[] = [
     icon: '.*',
     docId: 'regex',
     component: RegexTool,
+  },
+  {
+    id: 'uuid',
+    name: 'UUID / ULID Generator',
+    description: 'Generate UUID v4, v7, or ULID in batches.',
+    icon: 'ID',
+    docId: 'uuid',
+    component: UuidTool,
+  },
+  {
+    id: 'cron',
+    name: 'Cron Explainer',
+    description: 'Translate cron expressions into plain English with upcoming run times.',
+    icon: '⏱',
+    docId: 'cron',
+    component: CronTool,
+  },
+  {
+    id: 'diff',
+    name: 'Diff Viewer',
+    description: 'Compare two texts with line-by-line diff highlighting.',
+    icon: '±',
+    docId: 'diff',
+    component: DiffTool,
   },
 ];
 

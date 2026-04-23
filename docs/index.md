@@ -18,6 +18,9 @@ Dev Toolkits is an open-source desktop toolkit for common developer utilities. S
 | JWT Decoder | Decode JWT header and payload; show expiry status. |
 | Hash Generator | MD5, SHA-1, SHA-256, SHA-384, SHA-512 of text. |
 | Regex Tester | Live-test JavaScript regular expressions with match highlighting. |
+| UUID / ULID Generator | Generate UUID v4, v7, or ULID in batches. |
+| Cron Explainer | Translate cron expressions into plain English with next fire times. |
+| Diff Viewer | Compare two texts line-by-line with color-coded highlighting. |
 
 More tools will be added over time. See **Extending** for how to contribute a new tool.
 

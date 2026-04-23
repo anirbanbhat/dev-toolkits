@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Sidebar from './components/Sidebar';
+import ToolSelector from './components/ToolSelector';
 import HelpViewer from './components/HelpViewer';
 import { tools } from './tools/registry';
 
@@ -19,25 +19,36 @@ export default function App() {
 
   return (
     <div className="app">
-      <Sidebar
-        tools={tools}
-        activeToolId={activeToolId}
-        onSelect={setActiveToolId}
-        onOpenHelp={() => setHelpDocId(activeTool.docId)}
-      />
       <main className="main">
         <header className="toolbar">
-          <div>
-            <h1>{activeTool.name}</h1>
-            <p className="muted">{activeTool.description}</p>
+          <div className="toolbar-left">
+            <div className="brand">
+              <div className="brand-mark">DT</div>
+              <div className="brand-name">Dev Toolkits</div>
+            </div>
+            <ToolSelector
+              tools={tools}
+              activeToolId={activeToolId}
+              onSelect={setActiveToolId}
+            />
+            <p className="muted toolbar-desc">{activeTool.description}</p>
           </div>
-          <button
-            className="help-btn"
-            onClick={() => setHelpDocId(activeTool.docId)}
-            title="Open documentation for this tool"
-          >
-            ? Help
-          </button>
+          <div className="toolbar-right">
+            <button
+              className="help-btn"
+              onClick={() => setHelpDocId('index')}
+              title="Open user manual"
+            >
+              User Manual
+            </button>
+            <button
+              className="help-btn"
+              onClick={() => setHelpDocId(activeTool.docId)}
+              title="Open documentation for this tool"
+            >
+              ? Help
+            </button>
+          </div>
         </header>
         <div className="tool-surface">
           <ActiveComponent />

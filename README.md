@@ -39,7 +39,7 @@ cd dev-toolkits
 npm install
 npm run dev      # start in development mode
 npm run build    # build production bundle
-npm run package  # build .dmg / .exe / AppImage for the current OS
+npm run package  # build .dmg (macOS) or .exe (Windows)
 ```
 
 ### Adding a tool
@@ -59,7 +59,7 @@ Electron · React 18 · TypeScript · Vite · electron-builder
 Every push to `main` triggers `.github/workflows/release.yml`, which:
 
 1. Bumps the patch version (`x.y.z` → `x.y.(z+1)`) and pushes a commit + tag.
-2. Builds `.dmg` (macOS), `.exe` (Windows), and `.AppImage`/`.deb` (Linux) in parallel.
+2. Builds `.dmg` (macOS) and `.exe` (Windows) in parallel. Linux is not built; Linux users can install via `npm install -g dev-toolkits`.
 3. Publishes the same version to npm.
 4. Creates a GitHub Release for the tag with all binaries attached.
 

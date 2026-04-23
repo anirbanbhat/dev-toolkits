@@ -89,13 +89,6 @@
       "target": [
         "nsis"
       ]
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
-      "category": "Development"
     }
   }
 }

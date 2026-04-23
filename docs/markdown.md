@@ -42,17 +42,11 @@ Headings (H1–H6), bold, italic, lists, blockquotes, links, images, horizontal 
 
 ## PDF export
 
-The **Export PDF** button opens your OS print dialog with print-specific CSS applied:
+Click **Export PDF** → a native **save-file dialog** opens → pick a location and filename → the PDF is written directly to disk. No printer selection, no detour.
 
-- Only the preview pane is included (the editor, toolbar, and sidebar are hidden).
-- Background is white for printing.
-- Code blocks and tables break sensibly across pages.
+The PDF includes only the preview (editor/toolbar are stripped via a print stylesheet), uses a light theme for readability, and breaks cleanly across pages for code blocks and tables.
 
-From the dialog:
-
-- **macOS:** the "PDF" dropdown in the bottom-left → "Save as PDF".
-- **Windows:** pick "Microsoft Print to PDF" as the printer.
-- **Linux:** pick "Print to File" and choose PDF format.
+If you're running the markdown tool in a regular browser instead of the desktop app, Export PDF falls back to the system print dialog, where you can still choose "Save as PDF".
 
 ## Privacy
 

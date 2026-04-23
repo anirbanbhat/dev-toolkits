@@ -62,18 +62,37 @@ That's it. Edit the left pane to see your own content rendered here.
 
 export default function MarkdownTool() {
   const [source, setSource] = useState(SAMPLE);
+  const [status, setStatus] = useState<string | null>(null);
 
-  const exportPdf = () => {
+  const exportPdf = async () => {
     // The print CSS in index.css hides everything except .md-preview while
-    // the user is picking a target in the native print dialog. From there
-    // they can save as PDF (macOS: "Save as PDF" option in the dialog;
-    // Windows/Linux: "Microsoft Print to PDF" / similar).
+    // this class is on the body; printToPDF (Electron) or window.print
+    // (browser fallback) then captures only the preview.
     document.body.classList.add('printing-md');
-    window.print();
-    // A short delay lets the print dialog settle before we clean up; many
-    // browsers restore styles themselves, but removing the class ensures
-    // we're back to normal regardless.
-    setTimeout(() => document.body.classList.remove('printing-md'), 500);
+
+    // Let the browser apply the print-mode layout before we snapshot.
+    await new Promise((r) => requestAnimationFrame(() => r(undefined)));
+
+    try {
+      if (window.devtools?.savePdf) {
+        // Desktop app: go straight to a native save-file dialog; no printer
+        // step in the middle.
+        const result = await window.devtools.savePdf('document.pdf');
+        if (result.ok) {
+          setStatus(`Saved: ${result.path}`);
+          setTimeout(() => setStatus(null), 4000);
+        }
+      } else {
+        // Browser fallback (dev server, npm-serve): fall back to window.print
+        // and let the user pick "Save as PDF" in the system dialog.
+        window.print();
+      }
+    } catch (e) {
+      const message = e instanceof Error ? e.message : String(e);
+      setStatus(`PDF export failed: ${message}`);
+    } finally {
+      document.body.classList.remove('printing-md');
+    }
   };
 
   return (
@@ -100,9 +119,22 @@ export default function MarkdownTool() {
 
       <section className="pane">
         <div className="pane-header">
-          <span>Preview</span>
+          <span>
+            Preview
+            {status && (
+              <span
+                className="muted"
+                style={{ marginLeft: 10, fontSize: 12, fontWeight: 400 }}
+              >
+                {status}
+              </span>
+            )}
+          </span>
           <div className="pane-actions">
-            <button onClick={exportPdf} title="Open the print dialog; save as PDF there">
+            <button
+              onClick={exportPdf}
+              title="Save the preview as a PDF file"
+            >
               Export PDF
             </button>
           </div>

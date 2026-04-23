@@ -1,6 +1,6 @@
 # About Dev Toolkits
 
-Dev Toolkits is an open-source desktop toolkit of common developer utilities, packaged as both a native app (`.dmg` / `.exe` / AppImage) and an npm-installable CLI.
+Dev Toolkits is a desktop toolkit of common developer utilities, packaged as both a native app (`.dmg` / `.exe`) and an npm-installable CLI.
 
 ## Why
 
@@ -9,17 +9,12 @@ Developers reach for the same handful of small tools over and over — diagram r
 ## Principles
 
 - **Offline-first.** Every tool runs locally. Nothing you paste is sent over the network.
-- **One app, many tools.** A single window with a sidebar — no juggling tabs.
+- **One app, many tools.** A single window — no juggling tabs.
 - **Easy to extend.** Adding a tool is one component file plus one registry entry. See **Extending**.
-- **Open source.** MIT licensed.
 
 ## Tech stack
 
 - **Electron** for the desktop shell.
 - **React + TypeScript** for the UI.
 - **Vite** for development and bundling.
-- **electron-builder** for `.dmg` / `.exe` / AppImage packaging.
-
-## License
-
-MIT. See `LICENSE` in the repository root.
+- **electron-builder** for `.dmg` / `.exe` packaging.

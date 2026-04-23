@@ -22,6 +22,11 @@ declare global {
       readDoc: (docId: string) => Promise<string>;
       listDocs: () => Promise<string[]>;
       onOpenHelp: (handler: (docId: string) => void) => () => void;
+      savePdf: (
+        defaultFilename?: string,
+      ) => Promise<
+        { ok: true; path: string } | { ok: false; canceled: true }
+      >;
     };
   }
 }

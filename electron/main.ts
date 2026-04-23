@@ -1,6 +1,6 @@
-import { app, BrowserWindow, Menu, ipcMain, shell } from 'electron';
+import { app, BrowserWindow, Menu, ipcMain, shell, dialog } from 'electron';
 import path from 'node:path';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 // Must be set before `app` emits 'ready'. Without this, raw-binary launches
@@ -192,6 +192,31 @@ ipcMain.handle('docs:list', async () => {
     .filter((name) => name.endsWith('.md'))
     .map((name) => name.replace(/\.md$/, ''));
 });
+
+// Save the current window's contents as a PDF via a native save dialog.
+// The renderer is expected to toggle any "printing" class it wants applied
+// before calling this; printToPDF respects @media print styles.
+ipcMain.handle(
+  'pdf:save',
+  async (event, defaultFilename: string = 'document.pdf') => {
+    const win = BrowserWindow.fromWebContents(event.sender);
+    if (!win) throw new Error('No owning window for the request.');
+
+    const { filePath, canceled } = await dialog.showSaveDialog(win, {
+      defaultPath: defaultFilename,
+      filters: [{ name: 'PDF', extensions: ['pdf'] }],
+    });
+    if (canceled || !filePath) return { ok: false as const, canceled: true };
+
+    const data = await win.webContents.printToPDF({
+      pageSize: 'Letter',
+      printBackground: true,
+      margins: { marginType: 'default' },
+    });
+    await writeFile(filePath, data);
+    return { ok: true as const, path: filePath };
+  },
+);
 
 app.whenReady().then(async () => {
   // When launched as a raw binary from a terminal (e.g. via the npm bin

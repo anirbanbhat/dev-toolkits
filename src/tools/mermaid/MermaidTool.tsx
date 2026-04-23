@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import mermaid from 'mermaid';
+import { ensureMermaidInitialized } from '../../lib/mermaid-init';
 
 const DEFAULT_SOURCE = `graph TD
     A[Start] --> B{Is it working?}
@@ -7,15 +8,7 @@ const DEFAULT_SOURCE = `graph TD
     B -->|No| D[Debug]
     D --> B`;
 
-mermaid.initialize({
-  startOnLoad: false,
-  theme: 'default',
-  securityLevel: 'strict',
-  // Render labels as native SVG <text>, not HTML inside <foreignObject>.
-  // foreignObject cannot be rasterized by canvas.drawImage, so without this
-  // the JPEG export renders the diagram shapes but drops all the text labels.
-  flowchart: { htmlLabels: false },
-});
+ensureMermaidInitialized();
 
 export default function MermaidTool() {
   const [source, setSource] = useState(DEFAULT_SOURCE);

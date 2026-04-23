@@ -147,6 +147,18 @@ function buildMenu() {
           label: 'Diff Viewer — Docs',
           click: () => openHelpDoc('diff'),
         },
+        {
+          label: 'JSON / YAML / CSV — Docs',
+          click: () => openHelpDoc('convert'),
+        },
+        {
+          label: 'Markdown Viewer — Docs',
+          click: () => openHelpDoc('markdown'),
+        },
+        {
+          label: 'Number Base Converter — Docs',
+          click: () => openHelpDoc('numberbase'),
+        },
         { type: 'separator' },
         {
           label: 'Report an Issue',

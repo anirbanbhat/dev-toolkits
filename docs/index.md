@@ -21,6 +21,9 @@ Dev Toolkits is an open-source desktop toolkit for common developer utilities. S
 | UUID / ULID Generator | Generate UUID v4, v7, or ULID in batches. |
 | Cron Explainer | Translate cron expressions into plain English with next fire times. |
 | Diff Viewer | Compare two texts line-by-line with color-coded highlighting. |
+| JSON / YAML / CSV | Convert between the three formats. |
+| Markdown Viewer | Live preview with mermaid, syntax highlighting, PDF export. |
+| Number Base Converter | Convert integers across binary, octal, decimal, and hex. |
 
 More tools will be added over time. See **Extending** for how to contribute a new tool.
 

@@ -7,6 +7,9 @@ import RegexTool from './regex/RegexTool';
 import UuidTool from './uuid/UuidTool';
 import CronTool from './cron/CronTool';
 import DiffTool from './diff/DiffTool';
+import ConvertTool from './convert/ConvertTool';
+import MarkdownTool from './markdown/MarkdownTool';
+import NumberBaseTool from './numberbase/NumberBaseTool';
 
 /**
  * The single source of truth for which tools exist. Adding a new tool is a
@@ -76,6 +79,30 @@ export const tools: Tool[] = [
     icon: '±',
     docId: 'diff',
     component: DiffTool,
+  },
+  {
+    id: 'convert',
+    name: 'JSON / YAML / CSV',
+    description: 'Convert between JSON, YAML, and CSV formats.',
+    icon: '⇄',
+    docId: 'convert',
+    component: ConvertTool,
+  },
+  {
+    id: 'markdown',
+    name: 'Markdown Viewer',
+    description: 'Live markdown preview with mermaid, code highlighting, and PDF export.',
+    icon: 'MD',
+    docId: 'markdown',
+    component: MarkdownTool,
+  },
+  {
+    id: 'numberbase',
+    name: 'Number Base Converter',
+    description: 'Convert integers between binary, octal, decimal, and hex.',
+    icon: '0x',
+    docId: 'numberbase',
+    component: NumberBaseTool,
   },
 ];
 

@@ -17,6 +17,9 @@ const NAV: Array<{ id: string; label: string }> = [
   { id: 'uuid', label: 'UUID / ULID' },
   { id: 'cron', label: 'Cron' },
   { id: 'diff', label: 'Diff' },
+  { id: 'convert', label: 'JSON/YAML/CSV' },
+  { id: 'markdown', label: 'Markdown' },
+  { id: 'numberbase', label: 'Number Base' },
   { id: 'extending', label: 'Extending' },
   { id: 'about', label: 'About' },
 ];

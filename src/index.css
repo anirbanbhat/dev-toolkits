@@ -495,3 +495,153 @@ mark.regex-hit {
 .close-btn:hover {
   color: var(--text);
 }
+
+/* Markdown preview */
+.md-preview {
+  font-size: 14px;
+  line-height: 1.65;
+  padding: 20px 26px;
+  background: var(--bg);
+}
+
+.md-preview h1,
+.md-preview h2,
+.md-preview h3,
+.md-preview h4 {
+  margin-top: 1.4em;
+  margin-bottom: 0.5em;
+}
+
+.md-preview h1 {
+  font-size: 22px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.md-preview h2 {
+  font-size: 18px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+}
+
+.md-preview h3 {
+  font-size: 15px;
+}
+
+.md-preview p,
+.md-preview ul,
+.md-preview ol {
+  margin: 0.8em 0;
+}
+
+.md-preview code {
+  background: var(--bg-elev-2);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12.5px;
+}
+
+.md-preview pre {
+  background: var(--bg-elev-2);
+  padding: 12px;
+  border-radius: 8px;
+  overflow: auto;
+  font-size: 12.5px;
+  margin: 0.8em 0;
+}
+
+.md-preview pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.md-preview blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 0.8em 0;
+  padding: 4px 14px;
+  color: var(--text-dim);
+  background: var(--bg-elev);
+  border-radius: 4px;
+}
+
+.md-preview table {
+  border-collapse: collapse;
+  margin: 0.8em 0;
+}
+
+.md-preview th,
+.md-preview td {
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.md-preview th {
+  background: var(--bg-elev-2);
+}
+
+.md-preview a {
+  color: var(--accent);
+}
+
+.md-preview hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.4em 0;
+}
+
+.md-preview .mermaid-inline {
+  background: #fafafa;
+  padding: 16px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  margin: 0.8em 0;
+}
+
+.md-preview .mermaid-inline svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Print: when exporting the markdown preview to PDF, hide everything else
+   and show only the preview on a white background. Triggered by
+   document.body.classList.add('printing-md') before window.print(). */
+@media print {
+  /* visibility (not display) lets us keep the preview's ancestors in the
+     layout tree, then selectively re-show the preview's subtree. */
+  body.printing-md * {
+    visibility: hidden;
+  }
+  body.printing-md .md-preview,
+  body.printing-md .md-preview * {
+    visibility: visible;
+  }
+  body.printing-md .md-preview {
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+    background: #ffffff !important;
+    color: #0a0a0a !important;
+    padding: 20px;
+  }
+  body.printing-md .md-preview * {
+    color: #0a0a0a !important;
+    background-color: transparent !important;
+  }
+  body.printing-md .md-preview pre,
+  body.printing-md .md-preview code {
+    background-color: #f4f4f4 !important;
+    color: #0a0a0a !important;
+  }
+  body.printing-md .md-preview .mermaid-inline {
+    background-color: #ffffff !important;
+  }
+  body.printing-md .md-preview blockquote {
+    background-color: #f8f8f8 !important;
+  }
+  body.printing-md .md-preview pre,
+  body.printing-md .md-preview table {
+    page-break-inside: avoid;
+  }
+}

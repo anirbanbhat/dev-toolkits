@@ -1,5 +1,5 @@
 {
-  "name": "dev-toolkits",
+  "name": "@anirbanbhat/dev-toolkits",
   "productName": "Dev Toolkits",
   "version": "0.1.9",
   "description": "Open-source desktop toolkit of commonly used developer utilities (Mermaid renderer, JSON formatter, and more).",

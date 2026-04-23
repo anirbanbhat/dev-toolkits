@@ -80,7 +80,3 @@ The npm package version and the GitHub release tag are always identical — they
 ### Skipping a release
 
 If you push a commit to `main` that shouldn't trigger a release (docs tweak, CI fix, etc.), include `[skip release]` anywhere in the commit message.
-
-## License
-
-[MIT](LICENSE)

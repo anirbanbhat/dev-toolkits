@@ -15,7 +15,8 @@ Turn Mermaid source code into a rendered diagram in real time.
 | **Reset** | Restore the default example source. |
 | **Clear** | Empty the editor. |
 | **Copy SVG** | Copy the rendered SVG markup to your clipboard. |
-| **Download** | Save the rendered diagram as `diagram.svg`. |
+| **SVG** | Save the rendered diagram as `diagram.svg` (vector — best for editing or scaling). |
+| **JPEG** | Save the rendered diagram as `diagram.jpg` (raster, 2× scale, white background). |
 
 ## Supported diagram types
 

@@ -165,6 +165,17 @@ function buildMenu() {
           click: () =>
             shell.openExternal('https://github.com/anirbanbhat/dev-toolkits/issues'),
         },
+        { type: 'separator' },
+        {
+          label: 'Sponsor on GitHub',
+          click: () =>
+            shell.openExternal('https://github.com/sponsors/anirbanbhat'),
+        },
+        {
+          label: 'Sponsor on Polar',
+          click: () => shell.openExternal('https://polar.sh/devsoft-inc'),
+        },
+        { type: 'separator' },
         {
           label: 'About Dev Toolkits',
           click: () => openHelpDoc('about'),

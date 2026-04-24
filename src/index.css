@@ -257,6 +257,25 @@ button {
   border-color: var(--accent);
 }
 
+.sponsor-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #f06292, #ec407a);
+  color: #fff;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: filter 120ms ease;
+}
+
+.sponsor-btn:hover {
+  filter: brightness(1.08);
+}
+
 .tool-surface {
   flex: 1;
   overflow: hidden;

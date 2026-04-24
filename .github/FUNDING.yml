@@ -1,0 +1,9 @@
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+#
+# Once this file is on the default branch, GitHub adds a "Sponsor" button at
+# the top of the repo. The button opens a panel with one entry per platform
+# below. Each platform must be set up on its own side first (see PR notes).
+
+github: [anirbanbhat]
+custom:
+  - https://polar.sh/devsoft-inc

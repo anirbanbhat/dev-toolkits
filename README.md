@@ -80,3 +80,12 @@ The npm package version and the GitHub release tag are always identical — they
 ### Skipping a release
 
 If you push a commit to `main` that shouldn't trigger a release (docs tweak, CI fix, etc.), include `[skip release]` anywhere in the commit message.
+
+## Support
+
+Dev Toolkits is built and maintained in spare time. If you find it useful, two ways to support it:
+
+- **GitHub Sponsors** → https://github.com/sponsors/anirbanbhat (one-time or recurring; same place as the **Sponsor** button at the top of this repo)
+- **Polar** → https://polar.sh/devsoft-inc (one-time or recurring, alternative platform)
+
+Both feed back into time spent on new tools and bug fixes. Thank you.

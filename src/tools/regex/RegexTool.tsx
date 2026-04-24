@@ -32,7 +32,7 @@ interface CompileErr {
 }
 type CompileResult = CompileOk | CompileErr;
 
-function runRegex(pattern: string, flags: string, test: string): CompileResult {
+export function runRegex(pattern: string, flags: string, test: string): CompileResult {
   if (!pattern) return { ok: true, matches: [] };
   let re: RegExp;
   try {

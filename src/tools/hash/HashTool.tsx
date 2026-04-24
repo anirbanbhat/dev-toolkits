@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { md5 } from 'js-md5';
 
-const ALGORITHMS = ['MD5', 'SHA-1', 'SHA-256', 'SHA-384', 'SHA-512'] as const;
-type Algorithm = (typeof ALGORITHMS)[number];
+export const ALGORITHMS = ['MD5', 'SHA-1', 'SHA-256', 'SHA-384', 'SHA-512'] as const;
+export type Algorithm = (typeof ALGORITHMS)[number];
 
 const SAMPLE = 'The quick brown fox jumps over the lazy dog';
 
-function bytesToHex(buffer: ArrayBuffer): string {
+export function bytesToHex(buffer: ArrayBuffer): string {
   return Array.from(new Uint8Array(buffer))
     .map((b) => b.toString(16).padStart(2, '0'))
     .join('');
 }
 
-async function hash(text: string, algorithm: Algorithm): Promise<string> {
+export async function hash(text: string, algorithm: Algorithm): Promise<string> {
   if (algorithm === 'MD5') return md5(text);
   // Web Crypto's algorithm names are SHA-1, SHA-256, etc — same strings.
   const buf = new TextEncoder().encode(text);

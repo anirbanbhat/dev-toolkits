@@ -23,7 +23,7 @@ interface ParseErr {
 }
 type ParseResult = ParseOk | ParseErr;
 
-function explain(expression: string): ParseResult {
+export function explain(expression: string): ParseResult {
   const trimmed = expression.trim();
   if (!trimmed) return { ok: false, error: 'Enter a cron expression.' };
 

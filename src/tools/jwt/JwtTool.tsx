@@ -16,7 +16,7 @@ interface DecodeResult {
   signature: string;
 }
 
-function base64UrlDecode(input: string): string {
+export function base64UrlDecode(input: string): string {
   // JWT uses base64url; convert to base64 and pad.
   const b64 = input.replace(/-/g, '+').replace(/_/g, '/');
   const padded = b64 + '='.repeat((4 - (b64.length % 4)) % 4);
@@ -26,7 +26,7 @@ function base64UrlDecode(input: string): string {
   return new TextDecoder('utf-8').decode(bytes);
 }
 
-function decodeSection(part: string | undefined): DecodedSection {
+export function decodeSection(part: string | undefined): DecodedSection {
   if (!part) return { ok: false, error: 'Missing.' };
   try {
     const raw = base64UrlDecode(part);
@@ -36,7 +36,7 @@ function decodeSection(part: string | undefined): DecodedSection {
   }
 }
 
-function decode(token: string): DecodeResult | null {
+export function decode(token: string): DecodeResult | null {
   const trimmed = token.trim();
   if (!trimmed) return null;
   const parts = trimmed.split('.');
@@ -54,7 +54,7 @@ function decode(token: string): DecodeResult | null {
   };
 }
 
-function describeExpiry(payload: unknown): { label: string; tone: 'ok' | 'err' | 'neutral' } | null {
+export function describeExpiry(payload: unknown): { label: string; tone: 'ok' | 'err' | 'neutral' } | null {
   if (!payload || typeof payload !== 'object') return null;
   const exp = (payload as Record<string, unknown>).exp;
   if (typeof exp !== 'number') return null;
@@ -65,7 +65,7 @@ function describeExpiry(payload: unknown): { label: string; tone: 'ok' | 'err' |
   return { label: `Expires in ${formatRelative(diff)} (${date})`, tone: 'ok' };
 }
 
-function formatRelative(seconds: number): string {
+export function formatRelative(seconds: number): string {
   const abs = Math.abs(seconds);
   if (abs < 60) return `${abs}s`;
   if (abs < 3600) return `${Math.round(abs / 60)}m`;

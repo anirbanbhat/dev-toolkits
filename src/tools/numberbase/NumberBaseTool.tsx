@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-type Base = 2 | 8 | 10 | 16;
+export type Base = 2 | 8 | 10 | 16;
 
 const BASE_ORDER: Base[] = [2, 8, 10, 16];
 
@@ -11,7 +11,7 @@ const BASE_META: Record<Base, { label: string; prefix: string; chars: RegExp }> 
   16: { label: 'Hex', prefix: '0x', chars: /^[0-9a-fA-F]+$/ },
 };
 
-type InputMode = 'auto' | Base;
+export type InputMode = 'auto' | Base;
 
 interface Parsed {
   value: bigint;
@@ -19,7 +19,7 @@ interface Parsed {
 }
 type ParseResult = { ok: true; parsed: Parsed } | { ok: false; error: string };
 
-function detectBase(trimmed: string): Base {
+export function detectBase(trimmed: string): Base {
   const lower = trimmed.toLowerCase();
   if (lower.startsWith('0x')) return 16;
   if (lower.startsWith('0b')) return 2;
@@ -27,7 +27,7 @@ function detectBase(trimmed: string): Base {
   return 10;
 }
 
-function parseInput(raw: string, mode: InputMode): ParseResult {
+export function parseInput(raw: string, mode: InputMode): ParseResult {
   const trimmed = raw.trim();
   if (trimmed === '') return { ok: false, error: '' };
 
@@ -60,7 +60,7 @@ function parseInput(raw: string, mode: InputMode): ParseResult {
   }
 }
 
-function format(parsed: Parsed, base: Base): string {
+export function format(parsed: Parsed, base: Base): string {
   const sign = parsed.negative ? '-' : '';
   return sign + parsed.value.toString(base);
 }

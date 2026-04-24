@@ -1,7 +1,7 @@
 {
   "name": "dev-toolkits",
   "productName": "Dev Toolkits",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "Open-source desktop toolkit of commonly used developer utilities (Mermaid renderer, JSON formatter, and more).",
   "main": "dist-electron/main.js",
   "type": "module",

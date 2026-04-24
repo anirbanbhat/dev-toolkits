@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { v4 as uuidv4, v7 as uuidv7 } from 'uuid';
 import { ulid } from 'ulid';
 
-type Format = 'uuid-v4' | 'uuid-v7' | 'ulid';
+export type Format = 'uuid-v4' | 'uuid-v7' | 'ulid';
 
 const FORMAT_LABELS: Record<Format, string> = {
   'uuid-v4': 'UUID v4 (random)',
@@ -12,7 +12,7 @@ const FORMAT_LABELS: Record<Format, string> = {
 
 const COUNT_OPTIONS = [1, 5, 10, 25, 100];
 
-function generate(format: Format, count: number): string[] {
+export function generate(format: Format, count: number): string[] {
   const fn =
     format === 'uuid-v4' ? uuidv4 : format === 'uuid-v7' ? uuidv7 : ulid;
   return Array.from({ length: count }, () => fn());

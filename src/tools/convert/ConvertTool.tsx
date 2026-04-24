@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import yaml from 'js-yaml';
 import Papa from 'papaparse';
 
-type Format = 'json' | 'yaml' | 'csv';
+export type Format = 'json' | 'yaml' | 'csv';
 
 const FORMAT_LABELS: Record<Format, string> = {
   json: 'JSON',
@@ -33,7 +33,7 @@ const SAMPLE: Record<Format, string> = {
 `,
 };
 
-function parseSource(source: string, from: Format): unknown {
+export function parseSource(source: string, from: Format): unknown {
   if (source.trim() === '') return null;
   if (from === 'json') return JSON.parse(source);
   if (from === 'yaml') return yaml.load(source);
@@ -49,7 +49,7 @@ function parseSource(source: string, from: Format): unknown {
   return result.data;
 }
 
-function serialize(value: unknown, to: Format): string {
+export function serialize(value: unknown, to: Format): string {
   if (to === 'json') return JSON.stringify(value, null, 2);
   if (to === 'yaml') return yaml.dump(value, { lineWidth: 120 });
   // CSV: require an array of flat objects.
@@ -63,7 +63,7 @@ type ConvertResult =
   | { ok: true; output: string }
   | { ok: false; error: string };
 
-function convert(source: string, from: Format, to: Format): ConvertResult {
+export function convert(source: string, from: Format, to: Format): ConvertResult {
   try {
     const parsed = parseSource(source, from);
     if (parsed === null) return { ok: true, output: '' };

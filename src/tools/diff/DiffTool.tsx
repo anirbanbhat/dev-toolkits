@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { diffLines } from 'diff';
+import { diffLines, type Change } from 'diff';
 
 const DEFAULT_LEFT = `function greet(name) {
   return "Hello, " + name;
@@ -14,6 +14,17 @@ const DEFAULT_RIGHT = `function greet(name, greeting = "Hello") {
 greet("Alice");
 greet("Bob", "Hi");`;
 
+export function computeStats(diff: Change[]): { added: number; removed: number } {
+  let added = 0;
+  let removed = 0;
+  for (const part of diff) {
+    const lineCount = part.count ?? part.value.split('\n').length;
+    if (part.added) added += lineCount;
+    else if (part.removed) removed += lineCount;
+  }
+  return { added, removed };
+}
+
 export default function DiffTool() {
   const [left, setLeft] = useState(DEFAULT_LEFT);
   const [right, setRight] = useState(DEFAULT_RIGHT);
@@ -24,16 +35,7 @@ export default function DiffTool() {
     [left, right, ignoreWhitespace],
   );
 
-  const stats = useMemo(() => {
-    let added = 0;
-    let removed = 0;
-    for (const part of diff) {
-      const lineCount = part.count ?? part.value.split('\n').length;
-      if (part.added) added += lineCount;
-      else if (part.removed) removed += lineCount;
-    }
-    return { added, removed };
-  }, [diff]);
+  const stats = useMemo(() => computeStats(diff), [diff]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
